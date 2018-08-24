@@ -7,20 +7,21 @@
 </template>
 <script>
 import AdminPostForm from '@/components/Admin/AdminPostForm'
+import axios from 'axios'
 export default {
     layout: 'admin',
     components: {
         AdminPostForm
     },
-    data() {
-        return {
-            loadedPost: {
-                author: 'Marco',
-                title: 'First Post',
-                content: 'Thank ypu very much',
-                thumbnail: 'https://techcrunch.com/wp-content/uploads/2015/04/codecode.jpg'
+    asyncData(context) {
+        return axios
+        .get('https://nuxt-blog-59bd1.firebaseio.com/posts/' + context.params.postId + '.json')
+        .then(res => {
+            return {
+                loadedPost: res.data
             }
-        }
+        })
+        .catch(e => context.error(e))
     }
 }
 </script>

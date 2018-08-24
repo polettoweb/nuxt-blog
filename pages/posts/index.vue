@@ -9,16 +9,11 @@ export default {
     components: {
         PostList
     },
-    asyncData(context, callback) {
-        setTimeout(() => {
-        callback(null, {
-            loadedPosts: [
-            {id: '1', title: 'First Post', previewText: 'This is my first post', thumbnail: 'https://techcrunch.com/wp-content/uploads/2015/04/codecode.jpg'},
-            {id: '2', title: 'Second Post', previewText: 'This is my second post', thumbnail: 'https://techcrunch.com/wp-content/uploads/2015/04/codecode.jpg'}
-            ]
-        })    
-        }, 1500)
-    },
+    computed: {
+        loadedPosts() {
+            return this.$store.getters.loadedPosts
+        }
+    }
 }
 </script>
 
